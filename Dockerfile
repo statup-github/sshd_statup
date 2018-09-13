@@ -11,7 +11,7 @@ EXPOSE 22
 # init system will auto-generate one during boot.
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 
-RUN mkdir /root/.ssh \
+RUN mkdir -p /root/.ssh \
   && echo "${AUTHORIZED_KEYS}" > /root/.ssh/authorized_keys
 
 # Clean up APT when done.
