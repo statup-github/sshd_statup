@@ -1,0 +1,19 @@
+name: sshd_statup
+stages:
+- name: clone
+  steps:
+  - sourceCodeConfig:
+      branch: master
+      branchCondition: only
+      sourceCodeCredentialId: user-78n9l:c-85cg4-github-statup-github
+      url: https://github.com/statup-github/sshd_statup.git
+- name: publish
+  steps:
+  - publishImageConfig:
+      buildContext: .
+      dockerfilePath: ./Dockerfile
+      tag: stefanfritsch/sshd_statup:${CICD_EXECUTION_SEQUENCE}
+triggerCronExpression: 00 05 * * 6
+triggerCronTimezone: Europe/Berlin
+triggerWebhookPush: true
+triggerWebhookTag: true
